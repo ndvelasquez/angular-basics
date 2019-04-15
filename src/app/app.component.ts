@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'aprendiendo-angular';
+  title = 'Master de Javascript y Angular';
+  public mostrarComponente = true;
+  ocultarComponente(value: boolean) {
+    this.mostrarComponente = value;
+  }
 }
