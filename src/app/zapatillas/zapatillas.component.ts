@@ -6,7 +6,7 @@ import { Zapatilla } from '../models/zapatilla';
   templateUrl: './zapatillas.component.html'
 })
 
-export class ZapatillasComponent implements OnInit{
+export class ZapatillasComponent implements OnInit {
   public titulo: string;
   public zapatillas: Array<Zapatilla>;
   public marcasDeZapatillas: string[];
@@ -49,5 +49,4 @@ export class ZapatillasComponent implements OnInit{
   borrarMarca(indice: any) {
     this.marcasDeZapatillas.splice(indice, 1);
   }
-  
 }
