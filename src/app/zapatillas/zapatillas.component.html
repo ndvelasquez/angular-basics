@@ -1,4 +1,42 @@
 <h2>{{titulo}}</h2>
-<ul class="list-unstyled">
-    <li *ngFor="let zapatilla of zapatillas">{{zapatilla.marca}} {{zapatilla.modelo}} - <strong>${{zapatilla.precio}}</strong></li>
+<!-- Eventos con two-way data binding -->
+<p>Añadir Marca</p>
+<p>
+    <input type="text" [(ngModel)]="usuarioMarca" (keyup.enter)="getMarca()">
+    <button (click)="getMarca()">Mostrar Marca</button>
+    <button (click)="addMarca()">Añadir Marca</button>
+</p>
+<strong>{{usuarioMarca}}</strong>
+
+<p>Tenemos las mejores marcas disponibles</p>
+<ul>
+    <li *ngFor="let marcaDeZapatilla of marcasDeZapatillas; let indice of index">
+        {{marcaDeZapatilla}}
+        <button (click)="borrarMarca(indice)">Borrar</button>
+    </li>
 </ul>
+<ul>
+    <li *ngFor="let zapatilla of zapatillas">
+        {{zapatilla.marca}} {{zapatilla.modelo}} - <strong>${{zapatilla.precio}}</strong>
+        <span *ngIf="zapatilla.precio < 70"
+        [style.color]="zapatilla.precio < 70 ? 'green' : 'black'"> ¡EN OFRETA!
+        </span>
+        <span *ngIf="!zapatilla.stock"
+         [ngStyle]="{'color': !zapatilla.stock ? 'red' : 'black'}"> ¡AGOTADO!</span>
+    </li>
+</ul>
+
+<!-- Un Ejemplo de uso de directiva estructural ngSwitch -->
+<p>Color predeterminado por el componente:</p>
+<input type="text" [(ngModel)]="pruebaColor">
+<span [ngSwitch]="pruebaColor">
+<p *ngSwitchCase="'blue'" [ngStyle]="{'color': pruebaColor}">
+    azul
+</p>
+<p *ngSwitchCase="'green'" [ngStyle]="{'color': pruebaColor}">
+    verde
+</p>
+<p *ngSwitchCase="'yellow'" [ngStyle]="{'color': pruebaColor}">
+    amarillo
+</p>
+</span>
