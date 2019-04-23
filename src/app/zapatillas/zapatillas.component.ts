@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Zapatilla } from '../models/zapatilla';
+import { ZapatillaService } from '../services/zapatilla.service';
 
 @Component ({
   selector: 'zapatillas',
@@ -12,21 +13,15 @@ export class ZapatillasComponent implements OnInit {
   public marcasDeZapatillas: string[];
   public pruebaColor: string;
   public usuarioMarca: string;
-  constructor() {
+  constructor(private zapatillaService: ZapatillaService) {
     this.marcasDeZapatillas = new Array();
     this.titulo = 'Componente de Zapatillas';
     this.pruebaColor = 'green';
     this.usuarioMarca = 'Fila';
-    this.zapatillas = [
-      new Zapatilla('Futsal', 'Reebok', 'Negro', 55, true),
-      new Zapatilla('Mercurial', 'Addidas' , 'Verde' , 100, true),
-      new Zapatilla('Predator', 'Addidas' , 'Azul' , 100, true),
-      new Zapatilla('Air', 'Nike' , 'Negro' , 100, false),
-      new Zapatilla('Total 90', 'Nike' , 'Verde' , 100, true),
-    ];
   }
   ngOnInit() {
-    console.log(this.zapatillas);
+    this.zapatillas = this.zapatillaService.getZapatillas();
+    // alert(this.zapatillaService.getTexto());
     this.getMarcas();
   }
   getMarcas() {

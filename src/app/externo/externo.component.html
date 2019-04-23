@@ -1,0 +1,49 @@
+<h2>Agregar Usuario</h2>
+<form #newUserForm="ngForm" (ngSubmit)="onSubmit(newUserForm)">
+  <label for="name">Nombre</label> <br>
+  <input type="text" name="name" #name="ngModel" [(ngModel)]="newUser.name" required pattern="[A-Za-z]+">
+  <!-- Validacion -->
+  <div *ngIf="name.invalid && (name.dirty || name.touched)">
+    <div *ngIf="name.errors.required">
+      <span>Este campo es requerido</span>
+    </div>
+    <div *ngIf="name.errors.pattern">
+      <span>debes colocar un nombre válido</span>
+    </div>
+  </div>
+  <!-- Fin Validacion -->
+  <br>
+  <label for="job">Trabajo</label> <br>
+  <input type="text" name="job" #job="ngModel" [(ngModel)]="newUser.job" required> <br>
+  <!-- Validacion -->
+  <div *ngIf="job.invalid && (job.dirty || job.touched)">
+    <div *ngIf="job.errors.required">
+      <span>Este campo es requerido</span>
+    </div>
+  </div>
+  <!-- Fin Validacion -->
+  <input type="submit" value="Agregar Usuario" [disabled]="newUserForm.invalid">
+</form>
+
+<!-- Mostrar Usuario Creado -->
+<div *ngIf="savedUser">
+  <h2>Usuario Agregado con éxito</h2>
+  <h3>Nombre: {{savedUser.name}}</h3>
+  <h3>Trabajo: {{savedUser.job}}</h3>
+</div>
+
+<!-- Ejemplos de uso de varios pipes -->
+<p>Hoy es: {{ fecha | date:'dd/MM/yy' }}</p>
+{{ 12 | calculadora: 5 }}
+<br>
+<!-- introduce el id del usuario y ejecuta la consulta del mismo a la API REST -->
+<input type="text" [(ngModel)]="userId" (keyup.enter)="cargaUsuario()">
+<br>
+<!-- Muestra el usuario por GET-->
+<div *ngIf="!user">
+  <img src="../../assets/loading.gif" alt="">
+</div>
+<img src="{{user.avatar}}" width="150" alt="">
+<h2 *ngIf="user">
+  {{user.first_name + ' ' + user.last_name}}
+</h2>
